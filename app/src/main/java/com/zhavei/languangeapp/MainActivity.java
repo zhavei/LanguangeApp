@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new intent to open the {@link FamilyActivity}
                 Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-
+                //add toast on click
+                Toast.makeText(view.getContext(), "Open Family List", Toast.LENGTH_SHORT).show();
                 // Start the new activity
                 startActivity(familyIntent);
             }
@@ -62,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new intent to open the {@link ColorsActivity}
                 Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-
+                //add toast on click
+                Toast.makeText(view.getContext(), " open colors list", Toast.LENGTH_SHORT).show();
                 // Start the new activity
                 startActivity(colorsIntent);
             }
@@ -78,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Create a new intent to open the {@link PhrasesActivity}
                 Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-
+                //add toast on click
+                Toast.makeText(view.getContext(), "open list phrases", Toast.LENGTH_SHORT).show();
                 // Start the new activity
                 startActivity(phrasesIntent);
             }
