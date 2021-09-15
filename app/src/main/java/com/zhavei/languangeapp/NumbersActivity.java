@@ -16,16 +16,14 @@
 package com.zhavei.languangeapp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.DialogTitle;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
 public class NumbersActivity extends AppCompatActivity {
     private static final String TAG = "NumbersActivity";
@@ -49,6 +47,12 @@ public class NumbersActivity extends AppCompatActivity {
         numbersArray.add("eight");
         numbersArray.add("nine");
         numbersArray.add("ten");
+        numbersArray.add("eleven");
+        numbersArray.add("twoelve");
+        numbersArray.add("thirteen");
+        numbersArray.add("fourteen");
+        numbersArray.add("fiveteen");
+        numbersArray.add("sixteen");
 
 //        //get list index by one element
 //        LinearLayout rootView = (LinearLayout) findViewById(R.id.number_activity_layoutid);
@@ -57,15 +61,15 @@ public class NumbersActivity extends AppCompatActivity {
 //        rootView.addView(wordView);
 
 //        //iterate arraylist using forloop
-        LinearLayout rootView = (LinearLayout) findViewById(R.id.number_activity_layoutid);
-        for (int i = 0; i < numbersArray.size(); i++) {
-            // Create a new TextView
-            TextView wordView = new TextView(this);
-            // Set the text to be word at the current index
-            wordView.setText(numbersArray.get(i));
-            // Add this TextView as another child to the root view of this layout
-            rootView.addView(wordView);
-        }
+//        LinearLayout rootView = (LinearLayout) findViewById(R.id.number_activity_list);
+//        for (int i = 0; i < numbersArray.size(); i++) {
+//            // Create a new TextView
+//            TextView wordView = new TextView(this);
+//            // Set the text to be word at the current index
+//            wordView.setText(numbersArray.get(i));
+//            // Add this TextView as another child to the root view of this layout
+//            rootView.addView(wordView);
+//        }
 //        // iterate using whileloop
 //        LinearLayout rootView = (LinearLayout) findViewById(R.id.number_activity_layoutid);
 //        int index = 0;
@@ -79,6 +83,11 @@ public class NumbersActivity extends AppCompatActivity {
 //            // Increment the index variable by 1 | shorthands for~ index = index + 1
 //            index++;
 //        }
+
+            // using simple recycle view
+          ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, numbersArray);
+          ListView listView = (ListView) findViewById(R.id.number_activity_list);
+          listView.setAdapter(stringArrayAdapter);
 
     }
 }
