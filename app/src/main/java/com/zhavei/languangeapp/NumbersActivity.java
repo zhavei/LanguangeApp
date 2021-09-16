@@ -17,6 +17,7 @@ package com.zhavei.languangeapp;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -86,7 +87,7 @@ public class NumbersActivity extends AppCompatActivity {
 
             // using simple recycle view
           ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, numbersArray);
-          ListView listView = (ListView) findViewById(R.id.number_activity_list);
+          GridView listView = (GridView) findViewById(R.id.number_activity_list);
           listView.setAdapter(stringArrayAdapter);
 
     }
