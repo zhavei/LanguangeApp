@@ -16,14 +16,36 @@
 package com.zhavei.languangeapp;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 public class FamilyActivity extends AppCompatActivity {
+
+    ArrayList<WordDataModel> familyArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_family);
+        setContentView(R.layout.word_list_activity);
+
+        familyArrayList = new ArrayList<WordDataModel>();
+
+        familyArrayList.add(new WordDataModel("father", "ayah"));
+        familyArrayList.add(new WordDataModel("mother", "mamah"));
+        familyArrayList.add(new WordDataModel("aunty", "tante"));
+        familyArrayList.add(new WordDataModel("grandfather", "kakek"));
+        familyArrayList.add(new WordDataModel("sister", "kakak"));
+        familyArrayList.add(new WordDataModel("brother", "abang"));
+        familyArrayList.add(new WordDataModel("uncle", "paman"));
+        familyArrayList.add(new WordDataModel("son", "anak"));
+        familyArrayList.add(new WordDataModel("grandmother", "nenek"));
+        familyArrayList.add(new WordDataModel("step mother", "emak tiri"));
+
+        WordAdapater stringFamilyAdapter = new WordAdapater(this, familyArrayList);
+        ListView listView = (ListView) findViewById(R.id.word_list_activity);
+        listView.setAdapter(stringFamilyAdapter);
     }
 }

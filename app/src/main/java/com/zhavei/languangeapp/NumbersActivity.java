@@ -16,53 +16,48 @@
 package com.zhavei.languangeapp;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.GridView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
 public class NumbersActivity extends AppCompatActivity {
-    private static final String TAG = "NumbersActivity";
 
-    ArrayList<NumbersWord> numbersArray ;
+    ArrayList<WordDataModel> numbersArray ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_numbers);
+        setContentView(R.layout.word_list_activity);
 
-        numbersArray = new ArrayList<NumbersWord>();
+        numbersArray = new ArrayList<WordDataModel>();
 
-        numbersArray.add(new NumbersWord("one", "satu"));
-        numbersArray.add(new NumbersWord("two", "dua"));
-        numbersArray.add(new NumbersWord("three", "tiga"));
-        numbersArray.add(new NumbersWord("four", "empat"));
-        numbersArray.add(new NumbersWord("five", "lima"));
-        numbersArray.add(new NumbersWord("six", "enam"));
-        numbersArray.add(new NumbersWord("seven", "tujuh"));
-        numbersArray.add(new NumbersWord("eight", "delapan"));
-        numbersArray.add(new NumbersWord("nine", "sembilan"));
-        numbersArray.add(new NumbersWord("ten", "sepuluh"));
-        numbersArray.add(new NumbersWord("eleven", "sebelas"));
-        numbersArray.add(new NumbersWord("twoeleve", "duabelas"));
-        numbersArray.add(new NumbersWord("threeten", "tigabelas"));
-        numbersArray.add(new NumbersWord("fourten", "empatbelas"));
-        numbersArray.add(new NumbersWord("fiveten", "limabelas"));
-        numbersArray.add(new NumbersWord("sixten", "enambelas"));
-        numbersArray.add(new NumbersWord("seventen", "tujubelas"));
-        numbersArray.add(new NumbersWord("eighten", "delapanbelas"));
-        numbersArray.add(new NumbersWord("nineten", "sembilanbelas"));
-        numbersArray.add(new NumbersWord("twoenty", "duapuluh"));
-        numbersArray.add(new NumbersWord("twoentyone", "duapuluhsatu"));
+        numbersArray.add(new WordDataModel("one", "satu"));
+        numbersArray.add(new WordDataModel("two", "dua"));
+        numbersArray.add(new WordDataModel("three", "tiga"));
+        numbersArray.add(new WordDataModel("four", "empat"));
+        numbersArray.add(new WordDataModel("five", "lima"));
+        numbersArray.add(new WordDataModel("six", "enam"));
+        numbersArray.add(new WordDataModel("seven", "tujuh"));
+        numbersArray.add(new WordDataModel("eight", "delapan"));
+        numbersArray.add(new WordDataModel("nine", "sembilan"));
+        numbersArray.add(new WordDataModel("ten", "sepuluh"));
+        numbersArray.add(new WordDataModel("eleven", "sebelas"));
+        numbersArray.add(new WordDataModel("twoeleve", "duabelas"));
+        numbersArray.add(new WordDataModel("threeten", "tigabelas"));
+        numbersArray.add(new WordDataModel("fourten", "empatbelas"));
+        numbersArray.add(new WordDataModel("fiveten", "limabelas"));
+        numbersArray.add(new WordDataModel("sixten", "enambelas"));
+        numbersArray.add(new WordDataModel("seventen", "tujubelas"));
+        numbersArray.add(new WordDataModel("eighten", "delapanbelas"));
+        numbersArray.add(new WordDataModel("nineten", "sembilanbelas"));
+        numbersArray.add(new WordDataModel("twoenty", "duapuluh"));
+        numbersArray.add(new WordDataModel("twoentyone", "duapuluhsatu"));
 
         // using simple recycle view
-        NumbersWordAdapater stringArrayAdapter = new NumbersWordAdapater(this, numbersArray);
-        GridView listView = (GridView) findViewById(R.id.number_activity_list);
+        WordAdapater stringArrayAdapter = new WordAdapater(this, numbersArray);
+        ListView listView = (ListView) findViewById(R.id.word_list_activity);
         listView.setAdapter(stringArrayAdapter);
     }
 }

@@ -1,7 +1,6 @@
 package com.zhavei.languangeapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +12,11 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class NumbersWordAdapater extends ArrayAdapter<NumbersWord> {
+public class WordAdapater extends ArrayAdapter<WordDataModel> {
 
 
-    public NumbersWordAdapater(@NonNull Activity context, ArrayList<NumbersWord> numbersWordArrayList) {
-        super(context, 0, numbersWordArrayList);
+    public WordAdapater(@NonNull Activity context, ArrayList<WordDataModel> wordDataModelArrayList) {
+        super(context, 0, wordDataModelArrayList);
     }
 
     @NonNull
@@ -26,9 +25,9 @@ public class NumbersWordAdapater extends ArrayAdapter<NumbersWord> {
         View listItemView = convertView;
         if (listItemView == null){
             listItemView = LayoutInflater.from(getContext()).inflate(
-                    R.layout.numbers_list_layout, parent, false);
+                    R.layout.list_item_layout, parent, false);
         }
-        NumbersWord currentNumbersList = getItem(position);
+        WordDataModel currentNumbersList = getItem(position);
         TextView listItemDefaultTranslation = (TextView) listItemView.findViewById(R.id.default_languange);
         listItemDefaultTranslation.setText(currentNumbersList.getDefaultTrasnlation());
 

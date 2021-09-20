@@ -1,12 +1,12 @@
 package com.zhavei.languangeapp;
 
-public class NumbersWord {
+public class WordDataModel {
 
     private String laDefaultTranslation;
 
     private String IndoAppTranslation;
 
-    public NumbersWord(String defaultTrasnlation, String languangeTranslation) {
+    public WordDataModel(String defaultTrasnlation, String languangeTranslation) {
         laDefaultTranslation = defaultTrasnlation;
         IndoAppTranslation = languangeTranslation;
     }
