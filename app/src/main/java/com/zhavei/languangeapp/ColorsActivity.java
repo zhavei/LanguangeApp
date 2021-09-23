@@ -33,15 +33,14 @@ public class ColorsActivity extends AppCompatActivity {
 
         colorsArray = new ArrayList<WordDataModel>();
 
-        colorsArray.add(new WordDataModel("white", "putih"));
-        colorsArray.add(new WordDataModel("red", "merah"));
-        colorsArray.add(new WordDataModel("green", "hijau"));
-        colorsArray.add(new WordDataModel("brown", "cokelat"));
-        colorsArray.add(new WordDataModel("gray", "abu abuy"));
-        colorsArray.add(new WordDataModel("black", "hitam"));
-        colorsArray.add(new WordDataModel("dusty yellow", "kuning biasa"));
-        colorsArray.add(new WordDataModel("mustard yellow", "kuning telor"));
-        colorsArray.add(new WordDataModel("blue", "biru"));
+        colorsArray.add(new WordDataModel("white", "putih", R.drawable.color_white));
+        colorsArray.add(new WordDataModel("red", "merah", R.drawable.color_red));
+        colorsArray.add(new WordDataModel("green", "hijau", R.drawable.color_green));
+        colorsArray.add(new WordDataModel("brown", "cokelat", R.drawable.color_brown));
+        colorsArray.add(new WordDataModel("gray", "abu abuy", R.drawable.color_gray));
+        colorsArray.add(new WordDataModel("black", "hitam", R.drawable.color_black));
+        colorsArray.add(new WordDataModel("dusty yellow", "kuning biasa", R.drawable.color_dusty_yellow));
+        colorsArray.add(new WordDataModel("mustard yellow", "kuning telor", R.drawable.color_dusty_yellow));
 
         WordAdapater stringArrayColors = new WordAdapater(this, colorsArray);
         ListView listView = (ListView) findViewById(R.id.word_list_activity);

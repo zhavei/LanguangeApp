@@ -4,11 +4,19 @@ public class WordDataModel {
 
     private String laDefaultTranslation;
 
-    private String IndoAppTranslation;
+    private String indoAppTranslation;
 
-    public WordDataModel(String defaultTrasnlation, String languangeTranslation) {
+    private int imageDrawable;
+
+    public WordDataModel(String defaultTrasnlation, String languangeTranslation, int imageIcon) {
         laDefaultTranslation = defaultTrasnlation;
-        IndoAppTranslation = languangeTranslation;
+        indoAppTranslation = languangeTranslation;
+        imageDrawable = imageIcon;
+    }
+
+    public WordDataModel (String defaultPhrases, String indoPhrases){
+        laDefaultTranslation = defaultPhrases;
+        indoAppTranslation = indoPhrases;
     }
 
     public String getDefaultTrasnlation() {
@@ -16,7 +24,11 @@ public class WordDataModel {
     }
 
     public String getLanguangeTranslation() {
-        return IndoAppTranslation;
+        return indoAppTranslation;
+    }
+
+    public int getImageDrawable() {
+        return imageDrawable;
     }
 
 }
