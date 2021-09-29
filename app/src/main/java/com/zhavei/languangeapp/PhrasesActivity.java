@@ -44,7 +44,7 @@ public class PhrasesActivity extends AppCompatActivity {
         phrasesArrayList.add(new WordDataModel("hit", "pukul"));
         phrasesArrayList.add(new WordDataModel("push", "dorong"));
 
-        WordAdapater stringArrayPhrasesAdapter = new WordAdapater(this, phrasesArrayList);
+        WordAdapater stringArrayPhrasesAdapter = new WordAdapater(this, phrasesArrayList, R.color.category_phrases);
         ListView listView = (ListView) findViewById(R.id.word_list_activity);
         listView.setAdapter(stringArrayPhrasesAdapter);
     }

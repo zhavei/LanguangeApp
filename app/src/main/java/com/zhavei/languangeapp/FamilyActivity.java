@@ -44,7 +44,7 @@ public class FamilyActivity extends AppCompatActivity {
         familyArrayList.add(new WordDataModel("younger brother", "adek cowo", R.drawable.family_younger_brother));
         familyArrayList.add(new WordDataModel("younger sister", "adik cewe", R.drawable.family_younger_sister));
 
-        WordAdapater stringFamilyAdapter = new WordAdapater(this, familyArrayList);
+        WordAdapater stringFamilyAdapter = new WordAdapater(this, familyArrayList, R.color.category_family);
         ListView listView = (ListView) findViewById(R.id.word_list_activity);
         listView.setAdapter(stringFamilyAdapter);
     }

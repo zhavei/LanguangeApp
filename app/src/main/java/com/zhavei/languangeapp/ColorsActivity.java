@@ -42,7 +42,7 @@ public class ColorsActivity extends AppCompatActivity {
         colorsArray.add(new WordDataModel("dusty yellow", "kuning biasa", R.drawable.color_dusty_yellow));
         colorsArray.add(new WordDataModel("mustard yellow", "kuning telor", R.drawable.color_dusty_yellow));
 
-        WordAdapater stringArrayColors = new WordAdapater(this, colorsArray);
+        WordAdapater stringArrayColors = new WordAdapater(this, colorsArray, R.color.category_colors);
         ListView listView = (ListView) findViewById(R.id.word_list_activity);
         listView.setAdapter(stringArrayColors);
 

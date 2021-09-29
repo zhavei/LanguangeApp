@@ -56,7 +56,7 @@ public class NumbersActivity extends AppCompatActivity {
         numbersArray.add(new WordDataModel("twoentyone", "duapuluhsatu", R.mipmap.ic_launcher_round));
 
         // using simple recycle view
-        WordAdapater stringArrayAdapter = new WordAdapater(this, numbersArray);
+        WordAdapater stringArrayAdapter = new WordAdapater(this, numbersArray, R.color.category_numbers);
         ListView listView = (ListView) findViewById(R.id.word_list_activity);
         listView.setAdapter(stringArrayAdapter);
     }

@@ -2,6 +2,7 @@ package com.zhavei.languangeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean doubleBackPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +89,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(phrasesIntent);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        if (doubleBackPressedOnce){
+            super.onBackPressed();
+            return;
+        }
+
+        this.doubleBackPressedOnce = true;
+        Toast.makeText(this, "press again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackPressedOnce=false;
+            }
+        }, 2000);
+
     }
 }

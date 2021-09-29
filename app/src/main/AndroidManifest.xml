@@ -18,7 +18,6 @@
         <activity
             android:name=".ColorsActivity"
             android:label="@string/category_colors"
-            android:theme="@style/Color_Activity_colorPrimary"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -27,7 +26,6 @@
         <activity
             android:name=".FamilyActivity"
             android:label="@string/category_family"
-            android:theme="@style/family_Activity_colorPrimary"
             android:parentActivityName=".MainActivity">
 
             <meta-data
@@ -37,7 +35,6 @@
         <activity
             android:name=".NumbersActivity"
             android:label="@string/category_numbers"
-            android:theme="@style/Numbers_Activity_colorPrimary"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -46,7 +43,6 @@
         <activity
             android:name=".PhrasesActivity"
             android:label="@string/category_phrases"
-            android:theme="@style/Phrases_Activity_colorPrimary"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

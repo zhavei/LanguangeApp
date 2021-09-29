@@ -7,13 +7,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 
 public class WordAdapater extends ArrayAdapter<WordDataModel> {
 
+    private int colorResouceId;
 
-    public WordAdapater( Activity context, ArrayList<WordDataModel> wordDataModelArrayList) {
+
+    public WordAdapater( Activity context, ArrayList<WordDataModel> wordDataModelArrayList, int colorCategory) {
         super(context, 0, wordDataModelArrayList);
+        colorResouceId = colorCategory;
     }
 
 
@@ -33,7 +39,17 @@ public class WordAdapater extends ArrayAdapter<WordDataModel> {
         indoTranslationList.setText(currentNumbersList.getLanguangeTranslation());
 
         ImageView imageViewList = (ImageView) listItemView.findViewById(R.id.image_list);
-        imageViewList.setImageResource(currentNumbersList.getImageDrawable());
+        if (currentNumbersList.hasImage()){
+            imageViewList.setImageResource(currentNumbersList.getImageDrawable());
+
+            imageViewList.setVisibility(View.VISIBLE);
+        } else {
+            imageViewList.setVisibility(View.GONE);
+        }
+
+        View textContainer = listItemView.findViewById(R.id.text_container);
+        int color = ContextCompat.getColor(getContext(), colorResouceId);
+        textContainer.setBackgroundColor(color);
 
         return listItemView;
     }
