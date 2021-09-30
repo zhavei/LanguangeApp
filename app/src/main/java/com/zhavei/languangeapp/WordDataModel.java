@@ -10,16 +10,20 @@ public class WordDataModel {
 
     private static final int NO_IMAGE_PROVIDED = -1;
 
-    public WordDataModel(String defaultTrasnlation, String languangeTranslation, int imageIcon) {
+    private int audioResaourceId;
+
+    public WordDataModel(String defaultTrasnlation, String languangeTranslation, int imageIcon, int mediaPlayer) {
         laDefaultTranslation = defaultTrasnlation;
         indoAppTranslation = languangeTranslation;
         imageDrawable = imageIcon;
+        audioResaourceId = mediaPlayer;
     }
 
     // make method untuk yng tidak ada image
-    public WordDataModel(String defaultTrasnlation, String languangeTranslation) {
+    public WordDataModel(String defaultTrasnlation, String languangeTranslation, int mediaPlayer) {
         laDefaultTranslation = defaultTrasnlation;
         indoAppTranslation = languangeTranslation;
+        audioResaourceId = mediaPlayer;
     }
 
     //  method chek apakah ada image atau tidak
@@ -37,6 +41,10 @@ public class WordDataModel {
 
     public int getImageDrawable() {
         return imageDrawable;
+    }
+
+    public int getAudioResaourceId(){
+        return audioResaourceId;
     }
 
 }
