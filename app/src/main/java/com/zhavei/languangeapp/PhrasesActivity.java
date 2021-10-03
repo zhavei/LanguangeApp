@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +30,12 @@ import java.util.ListIterator;
 public class PhrasesActivity extends AppCompatActivity {
 
     MediaPlayer mMediaPlayer;
+    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mp) {
+            releaseMediaPlayer();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +62,23 @@ public class PhrasesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 WordDataModel wordDataModel = phrasesArrayList.get(position);
+
+                releaseMediaPlayer();
+
                 mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, wordDataModel.getAudioResaourceId());
                 mMediaPlayer.start();
+
+                mMediaPlayer.setOnCompletionListener(onCompletionListener);
+
+                Toast.makeText(PhrasesActivity.this, "finish play", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void releaseMediaPlayer() {
+        if (mMediaPlayer != null){
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
     }
 }

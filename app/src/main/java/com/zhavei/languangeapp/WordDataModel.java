@@ -47,6 +47,15 @@ public class WordDataModel {
         return audioResaourceId;
     }
 
+    @Override
+    public String toString() {
+        return "WordDataModel{" +
+                "laDefaultTranslation='" + laDefaultTranslation + '\'' +
+                ", indoAppTranslation='" + indoAppTranslation + '\'' +
+                ", imageDrawable=" + imageDrawable +
+                ", audioResaourceId=" + audioResaourceId +
+                '}';
+    }
 }
 
 //public class NumbersWord {
