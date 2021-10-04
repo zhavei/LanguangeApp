@@ -17,6 +17,7 @@ package com.zhavei.languangeapp;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -73,6 +74,14 @@ public class PhrasesActivity extends AppCompatActivity {
                 Toast.makeText(PhrasesActivity.this, "finish play", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+        Log.v("PhrasesActivity", "onStop");
+
     }
 
     private void releaseMediaPlayer() {
