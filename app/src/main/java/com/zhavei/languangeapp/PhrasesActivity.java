@@ -15,6 +15,8 @@
  */
 package com.zhavei.languangeapp;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,9 +30,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import static android.media.AudioManager.AUDIOFOCUS_LOSS;
+
 public class PhrasesActivity extends AppCompatActivity {
 
     MediaPlayer mMediaPlayer;
+    private AudioManager mAudioManager;
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                mMediaPlayer.pause();
+                mMediaPlayer.seekTo(0);
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mMediaPlayer.start();
+            } else if (focusChange == AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
+
     private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
@@ -42,6 +61,8 @@ public class PhrasesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list_activity);
+
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<WordDataModel> phrasesArrayList = new ArrayList<WordDataModel>();
         phrasesArrayList.add(new WordDataModel("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
@@ -66,10 +87,16 @@ public class PhrasesActivity extends AppCompatActivity {
 
                 releaseMediaPlayer();
 
-                mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, wordDataModel.getAudioResaourceId());
-                mMediaPlayer.start();
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
 
-                mMediaPlayer.setOnCompletionListener(onCompletionListener);
+                    mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, wordDataModel.getAudioResaourceId());
+                    mMediaPlayer.start();
+
+                    mMediaPlayer.setOnCompletionListener(onCompletionListener);
+                }
+
 
                 Toast.makeText(PhrasesActivity.this, "finish play", Toast.LENGTH_SHORT).show();
             }
@@ -85,9 +112,10 @@ public class PhrasesActivity extends AppCompatActivity {
     }
 
     private void releaseMediaPlayer() {
-        if (mMediaPlayer != null){
+        if (mMediaPlayer != null) {
             mMediaPlayer.release();
             mMediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
 }

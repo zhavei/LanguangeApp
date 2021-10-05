@@ -15,6 +15,8 @@
  */
 package com.zhavei.languangeapp;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -29,7 +31,23 @@ import java.util.ArrayList;
 public class ColorsActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
+    private AudioManager mAudioManager;
+    private AudioManager.OnAudioFocusChangeListener onAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                mediaPlayer.pause();
+                mediaPlayer.seekTo(0);
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                mediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
+
+    private MediaPlayer.OnCompletionListener mOnCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mp) {
             releaseMediaPlayer();
@@ -41,6 +59,8 @@ public class ColorsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list_activity);
+
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         final ArrayList<WordDataModel> colorsArray = new ArrayList<WordDataModel>();
 
@@ -60,15 +80,20 @@ public class ColorsActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 WordDataModel wordDataModel = colorsArray.get(position);
 
                 releaseMediaPlayer();
 
-                mediaPlayer = MediaPlayer.create(ColorsActivity.this, wordDataModel.getAudioResaourceId());
+                int result = mAudioManager.requestAudioFocus(onAudioFocusChangeListener,
+                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
 
-                mediaPlayer.start();
+                    mediaPlayer = MediaPlayer.create(ColorsActivity.this, wordDataModel.getAudioResaourceId());
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(mOnCompletionListener);
+                }
 
-                mediaPlayer.setOnCompletionListener(onCompletionListener);
 
                 Toast.makeText(ColorsActivity.this, "finish play", Toast.LENGTH_SHORT).show();
             }
@@ -87,6 +112,7 @@ public class ColorsActivity extends AppCompatActivity {
         if (mediaPlayer != null) {
             mediaPlayer.release();
             mediaPlayer = null;
+            mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
         }
     }
 }
