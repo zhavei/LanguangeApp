@@ -6,59 +6,68 @@
     android:layout_height="wrap_content"
     android:elevation="2dp"
     android:gravity="center_vertical"
-    android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="horizontal"
+    android:minHeight="?android:attr/listPreferredItemHeight"
     app:cardCornerRadius="2dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/cardview_bg"
-        android:gravity="center_vertical"
+        android:layout_height="@dimen/list_item_height"
         android:minHeight="?android:attr/listPreferredItemHeight"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image_list"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
+            android:background="@drawable/cardview_bg"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:id="@+id/text_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/image_list"
+            android:minHeight="?android:attr/listPreferredItemHeight"
+            android:orientation="vertical">
 
             <TextView
-                android:textColor="@color/white"
                 android:id="@+id/default_languange"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="bottom"
                 android:text="default languange"
                 android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/white"
                 android:textStyle="bold" />
 
             <TextView
-                android:textColor="@color/white"
                 android:id="@+id/indo_languange_list"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
+                android:layout_marginStart="16dp"
                 android:gravity="top"
                 android:text="indolanguange"
                 android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textColor="@color/white"
                 android:textStyle="italic" />
 
         </LinearLayout>
 
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/baseline_play_arrow_white_24" />
 
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </androidx.cardview.widget.CardView>
