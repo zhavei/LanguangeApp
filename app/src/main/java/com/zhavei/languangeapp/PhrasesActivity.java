@@ -34,88 +34,11 @@ import static android.media.AudioManager.AUDIOFOCUS_LOSS;
 
 public class PhrasesActivity extends AppCompatActivity {
 
-    MediaPlayer mMediaPlayer;
-    private AudioManager mAudioManager;
-    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
-        @Override
-        public void onAudioFocusChange(int focusChange) {
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                mMediaPlayer.pause();
-                mMediaPlayer.seekTo(0);
-            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-                mMediaPlayer.start();
-            } else if (focusChange == AUDIOFOCUS_LOSS) {
-                releaseMediaPlayer();
-            }
-        }
-    };
-
-    private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            releaseMediaPlayer();
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list_activity);
-
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-        final ArrayList<WordDataModel> phrasesArrayList = new ArrayList<WordDataModel>();
-        phrasesArrayList.add(new WordDataModel("Where are you going?", "minto wuksus", R.raw.phrase_where_are_you_going));
-        phrasesArrayList.add(new WordDataModel("What is your name?", "tinnә oyaase'nә", R.raw.phrase_what_is_your_name));
-        phrasesArrayList.add(new WordDataModel("My name is...", "oyaaset...", R.raw.phrase_my_name_is));
-        phrasesArrayList.add(new WordDataModel("How are you feeling?", "michәksәs?", R.raw.phrase_how_are_you_feeling));
-        phrasesArrayList.add(new WordDataModel("I’m feeling good.", "kuchi achit", R.raw.phrase_im_feeling_good));
-        phrasesArrayList.add(new WordDataModel("Are you coming?", "әәnәs'aa?", R.raw.phrase_are_you_coming));
-        phrasesArrayList.add(new WordDataModel("Yes, I’m coming.", "hәә’ әәnәm", R.raw.phrase_yes_im_coming));
-        phrasesArrayList.add(new WordDataModel("I’m coming.", "әәnәm", R.raw.phrase_im_coming));
-        phrasesArrayList.add(new WordDataModel("Let’s go.", "yoowutis", R.raw.phrase_lets_go));
-        phrasesArrayList.add(new WordDataModel("Come here.", "әnni'nem", R.raw.phrase_come_here));
-
-        WordAdapater stringArrayPhrasesAdapter = new WordAdapater(this, phrasesArrayList, R.color.category_phrases);
-        ListView listView = (ListView) findViewById(R.id.word_list_activity);
-        listView.setAdapter(stringArrayPhrasesAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                WordDataModel wordDataModel = phrasesArrayList.get(position);
-
-                releaseMediaPlayer();
-
-                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
-                        AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
-                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED){
-
-                    mMediaPlayer = MediaPlayer.create(PhrasesActivity.this, wordDataModel.getAudioResaourceId());
-                    mMediaPlayer.start();
-
-                    mMediaPlayer.setOnCompletionListener(onCompletionListener);
-                }
-
-
-                Toast.makeText(PhrasesActivity.this, "finish play", Toast.LENGTH_SHORT).show();
-            }
-        });
+        setContentView(R.layout.activity_category);
+        getSupportFragmentManager().beginTransaction().replace(R.id.container_fragment, new PhrasesFragment()).commit();
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        releaseMediaPlayer();
-        Log.v("PhrasesActivity", "onStop");
-
-    }
-
-    private void releaseMediaPlayer() {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.release();
-            mMediaPlayer = null;
-            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
-        }
-    }
 }

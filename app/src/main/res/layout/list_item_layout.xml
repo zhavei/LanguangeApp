@@ -8,20 +8,21 @@
     android:gravity="center_vertical"
     android:orientation="horizontal"
     android:minHeight="?android:attr/listPreferredItemHeight"
-    app:cardCornerRadius="2dp">
+    app:cardCornerRadius="2dp"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/list_item_height"
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:gravity="center_vertical"
+        android:background="@color/tan_background"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/image_list"
             android:layout_width="@dimen/list_item_height"
             android:layout_height="@dimen/list_item_height"
-            android:background="@drawable/cardview_bg"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
@@ -66,6 +67,11 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
             android:src="@drawable/baseline_play_arrow_white_24" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackground"/>
 
     </RelativeLayout>
 
